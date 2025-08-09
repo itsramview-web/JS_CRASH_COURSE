@@ -1,24 +1,27 @@
-//Class
-class Person {
- constructor(firstName, lastName, dob) {
-     this.firstName = firstName;
-      this.lastName = lastName;
-      this.dob = new Date(dob);
-     }
+const myform = document.querySelector('#my-form');
+const nameInput = document.querySelector('#name');
+const emailInput = document.querySelector('#my-form');
+const msg = document.querySelector('.msg');
+const userList = document.querySelector('#users');
 
-     getBirthYear() {
-        return this.dob.getFullYear();
-    }
+myform.addEventListener('submit', onSubmit);
 
-    getFullName() {
-     return `${this.firstName} ${this.lastName}`;
-    }
+function onSubmit(e) {
+    e.preventDefault();
+
+   if(nameInput.value === '' || emailInput.value === '') {
+    msg.classList.add('error');
+    msg.innerHTML = 'Please enter all fields';
+
+    setTimeout(() => msg.removal(), 3000);
+   } else {
+    const li = document.createElement('li');
+    li.appendChild(document.createTextNode(`${nameInput.value} : ${emailInput.value}`));
+
+    userList.appendChild(li);
+
+    // Clear field
+    nameInput.value = '';
+    emailInput.value = '';
+   }
 }
-
-
-// Instantiate object
-const person1 = new Person('John', 'Doe', '4-3-1980');
-const person2 = new Person('Mary', 'Smith','3-6-1970');
-
-console.log(person2.getFullName());
-console.log(person1);
